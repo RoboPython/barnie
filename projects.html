@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+
+    <title>WarGaming</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="projects.css" rel="stylesheet">
+
+  </head>
+
+  <body>
+
+  	<div class ="container">
+
+		<div class="row">
+
+			<div class="col-md-2 offset-md-1">	
+				<h1 class="heading" >Team 1</h1>
+			</div>
+
+			<div class="col-md-2 offset-md-1">	
+				<h1 class="heading">Team 2</h1>
+			</div>
+			<div class="col-md-2">	
+				<h1 class="heading">Team 1 Damage</h1>
+			</div>
+			<div class="col-md-2">	
+				<h1 class="heading">Team 2 Damage</h1>
+			</div>
+
+
+		</div>
+
+
+		<div class="selector">
+			<div class="row">
+				<div class="col-md-1 changeNumber">	
+					<img class="pull-right" onclick="move(-1,0)"src="left.png"></img>
+				</div>
+
+				<div class="col-md-1">	
+					<img id = "slot0" src="pic0.png"</img>
+				</div>
+				<div class="col-md-1 changeNumber">	
+					<img onclick="move(1,0);" src="right.png"</img>
+				</div>
+				<div class="col-md-1 changeNumber">	
+					<img onclick="move(-1,4)"src="left.png"></img>
+				</div>
+
+				<div class="col-md-1">	
+					<img id = "slot4" src="pic0.png"</img>
+				</div>
+				<div class="col-md-1 changeNumber">	
+					<img onclick="move(1,4);" src="right.png"</img>
+				</div>
+				<div class="col-md-2">	
+					<h1 id="damage11" class="damage">0</h1>
+				</div>
+				<div class="col-md-2">	
+					<h1 id="damage12" class="damage">0</h1>
+				</div>
+
+
+
+
+
+
+			</div>
+		</div>
+
+		<div class="selector">
+			<div class="row">
+				<div class="col-md-1 changeNumber">	
+					<img onclick="move(-1,1)"src="left.png"></img>
+				</div>
+
+				<div class="col-md-1">	
+					<img id="slot1" src="pic0.png"</img>
+				</div>
+				<div class="col-md-1 changeNumber">	
+					<img onclick="move(1,1);" src="right.png"</img>
+				</div>
+				<div class="col-md-1 changeNumber">	
+					<img onclick="move(-1,5)"src="left.png"></img>
+				</div>
+
+				<div class="col-md-1">	
+					<img id="slot5" src="pic0.png"</img>
+				</div>
+				<div class="col-md-1 changeNumber">	
+					<img onclick="move(1,5);" src="right.png"</img>
+				</div>
+				<div class="col-md-2">	
+					<h1 id="damage21" class="damage">0</h1>
+				</div>
+				<div class="col-md-2">	
+					<h1 id="damage22" class="damage">0</h1>
+				</div>
+
+
+
+			</div>
+		</div>
+		<div class="selector">
+			<div class="row">
+				<div class="col-md-1 changeNumber">	
+					<img onclick="move(-1,2)"src="left.png"></img>
+				</div>
+
+				<div class="col-md-1">	
+					<img id="slot2" src="pic0.png"</img>
+				</div>
+				<div class="col-md-1 changeNumber">	
+					<img onclick="move(1,2);" src="right.png"</img>
+				</div>
+				<div class="col-md-1 changeNumber">	
+					<img onclick="move(-1,6)"src="left.png"></img>
+				</div>
+
+				<div class="col-md-1">	
+					<img id="slot6" src="pic0.png"</img>
+				</div>
+				<div class="col-md-1 changeNumber">	
+					<img onclick="move(1,6);" src="right.png"</img>
+				</div>
+				<div class="col-md-2">	
+					<h1 id="damage31" class="damage">0</h1>
+				</div>
+				<div id="damage12"class="col-md-2">	
+					<h1 id="damage32" class="damage">0</h1>
+				</div>
+
+
+
+			</div>
+		</div>
+
+		<div class="selector">
+			<div class="row">
+				<div class="col-md-1 changeNumber">	
+					<img onclick="move(-1,3)"src="left.png"></img>
+				</div>
+
+				<div class="col-md-1">	
+					<img id="slot3" src="pic0.png"</img>
+				</div>
+				<div class="col-md-1 changeNumber">	
+					<img onclick="move(1,3);" src="right.png"</img>
+				</div>
+				<div class="col-md-1 changeNumber">	
+					<img onclick="move(-1,7)"src="left.png"></img>
+				</div>
+
+				<div class="col-md-1">	
+					<img id="slot7" src="pic0.png"</img>
+				</div>
+				<div class="col-md-1 changeNumber">	
+					<img onclick="move(1,7);" src="right.png"</img>
+				</div>
+				<div class="col-md-2">	
+					<h1 id="damage41" class="damage">0</h1>
+				</div>
+				<div class="col-md-2">	
+					<h1 id="damage42" class="damage">0</h1>
+				</div>
+
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-2 offset-md-4">	
+				<img id="fightButton" onclick="fight()" src="fight.png"</img>
+			</div>
+			<div class="col-md-2 offset-md-4">	
+				<img id="fightButton" onclick="reset()" src="reset.png"</img>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-6 offset-md-2">	
+				<p id="errorMessage" class="errorMessage"></p>
+			</div>
+		</div>
+
+
+
+
+
+
+
+	</div>
+
+
+
+
+
+
+	<script type="text/javascript" src="projects.js"></script>
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="../../dist/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+  </body>
+</html>

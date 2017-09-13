@@ -1,0 +1,33 @@
+.changeNumber{
+	padding-top:40px;
+
+}
+
+.errorMessage{
+	font-size:30px;
+	color:#53c6ed;
+	font-weight:bold;
+
+}
+
+.selector{
+	margin-top:10px;
+
+}
+
+.container{
+	margin:0px;
+	width:100%;
+
+}
+
+.heading{
+	color:#53c6ed;
+}
+
+.damage{
+	color:#53c6ed;
+	padding-top:40px;
+
+
+}
