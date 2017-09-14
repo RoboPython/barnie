@@ -1,0 +1,121 @@
+<html>
+	<head>
+    	<link href="projects.css" rel="stylesheet">
+	</head>
+	<body>
+		<table>
+		  <tr>
+			<th>Team 1</th>
+			<th>Team 2</th>
+			<th>Team 1 Damage Recieved</th> 
+			<th>Team 2 Damage Recieved</th> 
+			<th>Team 1 Damage Dealt</th> 
+			<th>Team 2 Damage Dealt</th> 
+
+
+		  </tr>
+		  <tr>
+			<td>
+				<select id="pos0" onchange="change(0)">
+				  <option value="0">None</option>
+				  <option value="1">Carrier</option>
+				  <option value="2">Cruiser</option>
+				  <option value="3">Bombard</option>
+				</select>
+			</td>
+			<td>
+				<select id="pos4" onchange="change(4)">
+				  <option value="0">None</option>
+				  <option value="1">Carrier</option>
+				  <option value="2">Cruiser</option>
+				  <option value="3">Bombard</option>
+				</select>
+			</td>
+			<td id="damage11">0</td>
+			<td id="damage12">0</td>
+			<td id="damage13">0</td>
+			<td id="damage14">0</td>
+		  </tr>
+		  <tr>
+			<td>
+				<select id="pos1" onchange="change(1)">
+				  <option value="0">None</option>
+				  <option value="1">Carrier</option>
+				  <option value="2">Cruiser</option>
+				  <option value="3">Bombard</option>
+				</select>
+			</td>
+			<td>
+				<select id="pos5" onchange="change(5)">
+				  <option value="0">None</option>
+				  <option value="1">Carrier</option>
+				  <option value="2">Cruiser</option>
+				  <option value="3">Bombard</option>
+				</select>
+			</td>
+			<td id="damage21">0</td>
+			<td id="damage22">0</td>
+			<td id="damage23">0</td>
+			<td id="damage24">0</td>
+		  </tr>
+
+		  <tr>
+			<td>
+				<select id="pos2" onchange="change(2)">
+				  <option value="0">None</option>
+				  <option value="1">Carrier</option>
+				  <option value="2">Cruiser</option>
+				  <option value="3">Bombard</option>
+				</select>
+			</td>
+			<td>
+				<select id="pos6" onchange="change(6)">
+				  <option value="0">None</option>
+				  <option value="1">Carrier</option>
+				  <option value="2">Cruiser</option>
+				  <option value="3">Bombard</option>
+				</select>
+			</td>
+			<td id="damage31">0</td>
+			<td id="damage32">0</td>
+			<td id="damage33">0</td>
+			<td id="damage34">0</td>
+		  </tr>
+		  <tr>
+			<td>
+				<select id="pos3" onchange="change(3)">
+				  <option value="0">None</option>
+				  <option value="1">Carrier</option>
+				  <option value="2">Cruiser</option>
+				  <option value="3">Bombard</option>
+				</select>
+			</td>
+			<td>
+				<select id="pos7" onchange="change(7)">
+				  <option value="0">None</option>
+				  <option value="1">Carrier</option>
+				  <option value="2">Cruiser</option>
+				  <option value="3">Bombard</option>
+				</select>
+			</td>
+			<td id="damage41">0</td>
+			<td id="damage42">0</td>
+			<td id="damage43">0</td>
+			<td id="damage44">0</td>
+		  </tr>
+		  
+		  
+
+
+
+
+		</table>
+
+
+	  <h2 id="errorMessage"></h2>
+	  <button onclick="calculating()" id="fightButton" type="button">Fight</button>
+	  <button onclick="reset()" type="button">Reset</button>
+
+		<script type="text/javascript" src="projects.js"></script>
+	</body>
+</html>

@@ -2,14 +2,8 @@ var states = [0,0,0,0,0,0,0,0]
 var numberOfTypes = 4
 var fightOn = true;
 
-function move(direction,positionNumber){
-	node = document.getElementById("slot"+String(positionNumber));
-	newValue = (states[positionNumber] + direction) % numberOfTypes;
-	if (newValue < 0){
-		newValue = numberOfTypes + newValue
-	}
-	states[positionNumber] = newValue;
-	node.src = "pic"+String(newValue)+".png"
+function change(positionNumber){
+	states[positionNumber] = Number(document.getElementById("pos"+String(positionNumber)).value);
 	setUpOk();
 }
 
@@ -17,52 +11,31 @@ function move(direction,positionNumber){
 function setUpOk(){
 	var team1  = states.slice(0,4);
 	var team2  = states.slice(4,8);
-	console.log(team1);
 	
 	var blankFound = false;
 	var error1 = false;
 	for(var i=0;i<team1.length;i++){
 		if (blankFound === false){
-			if (team1[i] === (numberOfTypes -1)){
+			if (team1[i] === (0)){
 				blankFound = true;
 			}
 		}else{
-			if (team1[i] != (numberOfTypes -1)){
+			if (team1[i] != (0)){
 				error1 = true;
 			}
 		
 		}
 	
 	}
-
-	var blankFound = false;
-	var error1 = false;
-	for(var i=0;i<team1.length;i++){
-		if (blankFound === false){
-			if (team1[i] === (numberOfTypes -1)){
-				blankFound = true;
-			}
-		}else{
-			if (team1[i] != (numberOfTypes -1)){
-				error1 = true;
-			}
-		
-		}
-	
-	}
-
-
-
-
 	var blankFound = false;
 	var error2 = false;
 	for(var i=0;i<team2.length;i++){
 		if (blankFound === false){
-			if (team2[i] === (numberOfTypes -1)){
+			if (team2[i] === (0)){
 				blankFound = true;
 			}
 		}else{
-			if (team2[i] != (numberOfTypes -1)){
+			if (team2[i] != (0)){
 				error2 = true;
 			}
 		
@@ -72,14 +45,14 @@ function setUpOk(){
 
 	if (error1 || error2 === true){
 		document.getElementById("errorMessage").innerHTML = "Incorrect setup, no blanks allowed.";
-		document.getElementById("fightButton").src = "fightDisabled.png";
 		fightOn = false;
+		document.getElementById("fightButton").disabled = true;
 
 
 	}else{
 		document.getElementById("errorMessage").innerHTML = "Good team composition.";
-		document.getElementById("fightButton").src = "fight.png";
 		fightOn = true;
+		document.getElementById("fightButton").disabled = false;
 
 		
 	}
@@ -92,7 +65,9 @@ function setUpOk(){
 
 
 
-function setDamage(team1,team2){
+function setDamage(team1,team2,team1Given,team2Given){
+
+	//damage recieved
 	for(var i=0;i<team1.length;i++){
 		var id = "damage" + String(i+1) + "1";
 		element = document.getElementById(id).innerHTML = team1[i];
@@ -104,6 +79,22 @@ function setDamage(team1,team2){
 		element = document.getElementById(id).innerHTML = team2[i];
 	
 	}
+
+
+	//damage given
+	for(var i=0;i<team1Given.length;i++){
+		var id = "damage" + String(i+1) + "3";
+		element = document.getElementById(id).innerHTML = team1Given[i];
+	
+	}
+
+	for(var i=0;i<team2Given.length;i++){
+		var id = "damage" + String(i+1) + "4";
+		element = document.getElementById(id).innerHTML = team2Given[i];
+	
+	}
+
+
 }
 
 function reset(){
@@ -150,13 +141,14 @@ function rollForDamage(damageProfile){
 }
 
 function calcDamage(){
-	var team1DamageTotal = 0; //damage dealt by that team
-	var team2DamageTotal = 0;
-	var cruiserDamageProfile = [[0.25,0],[0.40,1],[0.25,2],[0.10,3]];
-	var bombardDamageProfile = [[0.05,1],[0.10,2],[0.20,3],[0.20,4],[0.10,5],[0.35,0]];
-	var carrierDamageProfile = [[0.20,1],[0.25,2],[0.25,3],[0.15,4],[0.05,5],[0.10,0]];
+	var cruiserDamageProfile = [[0.25,0],[0.20,1],[0.35,2],[0.20,3]];
+	var bombardDamageProfile = [[0.05,1],[0.30,4],[0.25,5],[0.40,0]];
+	var carrierDamageProfile = [[0.10,0],[0.25,1],[0.30,2],[0.25,3],[0.05,4],[0.05,5]];
 	var noneDamageProfile = [[1.00,0]];
-	var numberToProfile = {0:cruiserDamageProfile,1:bombardDamageProfile,2:carrierDamageProfile,3:noneDamageProfile};
+	var numberToProfile = {0:noneDamageProfile,1:carrierDamageProfile,2:cruiserDamageProfile,3:bombardDamageProfile};
+	var team1DamageTotal = []; //damage dealt by that team
+	var team2DamageTotal = [];
+
 
 
 
@@ -164,16 +156,18 @@ function calcDamage(){
 	var team1  = states.slice(0,4);
 	for(var i =0;i<team1.length;i++){
 		var toAdd = rollForDamage(numberToProfile[team1[i]]);
-		team1DamageTotal += toAdd;
+		team1DamageTotal.push(toAdd);
 	}
 
 
 	var team2  = states.slice(4,8);
 	for(var i =0;i<team2.length;i++){
 		var toAdd = rollForDamage(numberToProfile[team2[i]]);
-		team2DamageTotal += toAdd;
+		team2DamageTotal.push(toAdd);
 		
 	}
+
+
 
 	return [team1DamageTotal,team2DamageTotal];
 
@@ -181,55 +175,70 @@ function calcDamage(){
 }
 
 function dealDamage(damageTotals){
-	//the damages in total damage are those dealt by that team 
 	//find how many ships
 	//relies on the fact there are no gaps
+	
+	team1DamagesDealt = damageTotals[0];
+	team2DamagesDealt = damageTotals[1];
+
+
 	var team1  = states.slice(0,4);
 	team1Ships = team1.length;
 	for(var i =0;i<team1.length;i++){
-		if(team1[i] === 3){
+		if(team1[i] === 0){
 			team1Ships -= 1;
 		}
 	}
 	
-	team1DamageList = [0,0,0,0];
-	for(var i=0;i<damageTotals[1];i++){
-		team1DamageList[i%team1Ships] +=1
+	team1DamageTaken = [0,0,0,0];
+
+	for(var j=0;j<team2DamagesDealt.length;j++){
+		console.log("now share this damage : " +team2DamagesDealt[j]);
+		for (var i=0;i<team2DamagesDealt[j];i++){
+			team1DamageTaken[i % team1Ships] +=1
+		}
 	}
-
-
-
-	
-
 
 	var team2  = states.slice(4,8);
 	team2Ships = team2.length;
 	for(var i =0;i<team2.length;i++){
-		if(team2[i] === 3){
+		if(team2[i] === 0){
 			team2Ships -= 1;
 		}
 	}
+	
+	team2DamageTaken = [0,0,0,0];
 
-	team2DamageList = [0,0,0,0];
-	for(var i=0;i<damageTotals[0];i++){
-		team2DamageList[i%team2Ships] +=1
+	for(var j=0;j<team1DamagesDealt.length;j++){
+		console.log("now share this damage : " +team1DamagesDealt[j]);
+		for (var i=0;i<team1DamagesDealt[j];i++){
+			team2DamageTaken[i % team2Ships] +=1
+		}
 	}
 
-	setDamage(team1DamageList,team2DamageList);
+
+
+	setDamage(team1DamageTaken,team2DamageTaken,team1DamagesDealt,team2DamagesDealt);
 
 
 	
 
 }
 
-
-
-
-
-
 function fight(){
 	var damageTotals = calcDamage();
 	dealDamage(damageTotals);
+	document.getElementById("errorMessage").innerHTML = "";
+
 
 }
+
+
+
+function calculating(){
+	document.getElementById("errorMessage").innerHTML = "Calculating...";
+	setTimeout(fight, 2000);
+
+}
+
 
