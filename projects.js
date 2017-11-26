@@ -1,5 +1,5 @@
 var states = [0,0,0,0,0,0,0,0]
-var numberOfTypes = 4
+var numberOfTypes = 6
 var fightOn = true;
 
 function change(positionNumber){
@@ -98,7 +98,13 @@ function setDamage(team1,team2,team1Given,team2Given){
 }
 
 function reset(){
-	setDamage([0,0,0,0],[0,0,0,0]);
+	setDamage([0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]);
+	var states = [0,0,0,0,0,0,0,0];
+	for(var i = 0;i<8;i++)
+	{
+		document.getElementById('pos'+ i).selectedIndex = 0;
+	}
+
 }
 
 function rollForDamage(damageProfile){
@@ -145,7 +151,11 @@ function calcDamage(){
 	var bombardDamageProfile = [[0.05,1],[0.30,4],[0.25,5],[0.40,0]];
 	var carrierDamageProfile = [[0.10,0],[0.25,1],[0.30,2],[0.25,3],[0.05,4],[0.05,5]];
 	var noneDamageProfile = [[1.00,0]];
-	var numberToProfile = {0:noneDamageProfile,1:carrierDamageProfile,2:cruiserDamageProfile,3:bombardDamageProfile};
+	var carrierPlusDamageProfile = [[0.10,1],[0.25,2],[0.30,3],[0.25,4],[0.05,5],[0.05,6]];
+	var cruiserPlusDamageProfile = [[0.25,1],[0.20,2],[0.35,3],[0.20,4]];
+
+
+	var numberToProfile = {0:noneDamageProfile,1:carrierDamageProfile,2:cruiserDamageProfile,3:bombardDamageProfile,4:carrierPlusDamageProfile,5:cruiserPlusDamageProfile};
 	var team1DamageTotal = []; //damage dealt by that team
 	var team2DamageTotal = [];
 
